@@ -1,26 +1,31 @@
 const gridContainer = document.querySelector('.grid-container')
+const gridItems = []
+
 
 for(let i = 0; i < 16 * 16; i++) {
-    let gridItem = document.createElement('div')
+    const gridItem = document.createElement('div')
+    gridItems.push(gridItem)
     gridContainer.appendChild(gridItem)
     gridItem.classList.add('grid-items')
+    gridItem.addEventListener('mousedown', paintTheGrid)
+    gridItem.addEventListener('mouseenter', paintTheGrid)
+
     
 }
 
-const gridItems = document.querySelectorAll('.grid-items')
 
-
+let isPainting = false
 
 function paintTheGrid(e) {
-    e.target.style.backgroundColor = 'red'
+    if(isPainting || e.type === 'mousedown') e.target.style.backgroundColor = 'red'
 }
 
-function addOrRemoveEventListener(){
-    for(let gridItem of gridItems) {
-        isPainting ? gridItem.addEventListener('mouseenter', paintTheGrid) : gridItem.removeEventListener('mouseenter', paintTheGrid)
-    }
+// function addOrRemoveEventListener(){
+//     for(let gridItem of gridItems) {
+//         isPainting ? gridItem.addEventListener('mouseenter', paintTheGrid) : gridItem.removeEventListener('mouseenter', paintTheGrid)
+//     }
 
-}
+// }
 
 function clearAll(e) {
     if(e.key.toLowerCase() === 'c') {
@@ -33,17 +38,20 @@ function clearAll(e) {
     }
 }
 
-let isPainting = false
 
-addEventListener('mousedown', () => {
+
+document.addEventListener('mousedown', (e) => {
+    e.preventDefault()
     isPainting = true
-    addOrRemoveEventListener()
-    console.log(isPainting)
-})
-addEventListener('mouseup', () => {
-    isPainting = false
-    addOrRemoveEventListener()
+    // addOrRemoveEventListener()
     console.log(isPainting)
 })
 
-addEventListener('keydown', clearAll)
+
+document.addEventListener('mouseup', () => {
+    isPainting = false
+    // addOrRemoveEventListener()
+    console.log(isPainting)
+})
+
+document.addEventListener('keydown', clearAll)
