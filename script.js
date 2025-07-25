@@ -8,18 +8,7 @@ for(let i = 0; i < 16 * 16; i++) {
 }
 
 const gridItems = document.querySelectorAll('.grid-items')
-let isPainting = false
 
-addEventListener('mousedown', () => {
-    isPainting = true
-    addOrRemoveEventListener()
-    console.log(isPainting)
-})
-addEventListener('mouseup', () => {
-    isPainting = false
-    addOrRemoveEventListener()
-    console.log(isPainting)
-})
 
 
 function paintTheGrid(e) {
@@ -43,5 +32,18 @@ function clearAll(e) {
         
     }
 }
+
+let isPainting = false
+
+addEventListener('mousedown', () => {
+    isPainting = true
+    addOrRemoveEventListener()
+    console.log(isPainting)
+})
+addEventListener('mouseup', () => {
+    isPainting = false
+    addOrRemoveEventListener()
+    console.log(isPainting)
+})
 
 addEventListener('keydown', clearAll)
