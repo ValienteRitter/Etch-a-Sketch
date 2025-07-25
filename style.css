@@ -6,6 +6,20 @@ html, body {
     height: 100%;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .grid-container {
     display: grid;
+    height: 512px;
+    width: 512px;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
+}
+
+.grid-items {
+    border: 2px solid black;
 }
