@@ -10,7 +10,7 @@ html, body, .app-container {
     display: grid;
     justify-content: center;
     align-items: center;
-    grid-template-columns: 25rem 1fr;
+    grid-template-columns: 25rem 1fr 10rem;
 }
 
 .color-menu {
@@ -24,10 +24,28 @@ html, body, .app-container {
     align-self: flex-start;
 }
 
+.tool-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding: 10px;
+    height: 100vh;
+    width: 10rem;
+    border: 2px solid black;
+}
+
+.tool-menu > button {
+    width: 10em;
+    border-radius: 3rem;
+    margin-bottom: 10px;
+}
+
 .color-item {
     height: 3rem;
     width: 3rem;
     margin: 5px;
+    border: 1px solid black;
 }
 
 .grid-container {
@@ -37,6 +55,7 @@ html, body, .app-container {
     grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(16, 1fr);
     align-self: center;
+    justify-self: center;
 }
 
 .grid-items {
