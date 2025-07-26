@@ -1,5 +1,23 @@
+const appContainer = document.querySelector('.app-container')
+const colorMenu = document.querySelector('.color-menu')
 const gridContainer = document.querySelector('.grid-container')
 const gridItems = []
+const colors = ['red', 'blue', 'green', 'yellow']
+
+let currentColor
+
+for(let color of colors) {
+    const colorItem = document.createElement('div')
+    colorItem.classList.add('color-item')
+    colorItem.style.backgroundColor = color
+    colorMenu.appendChild(colorItem)
+    colorItem.addEventListener('mousedown', (e) => {
+        currentColor = e.target.style.backgroundColor
+        console.log(currentColor)
+    })
+    
+
+}
 
 
 for(let i = 0; i < 16 * 16; i++) {
@@ -17,7 +35,7 @@ for(let i = 0; i < 16 * 16; i++) {
 let isPainting = false
 
 function paintTheGrid(e) {
-    if(isPainting || e.type === 'mousedown') e.target.style.backgroundColor = 'red'
+    if(isPainting || e.type === 'mousedown') e.target.style.backgroundColor = currentColor
 }
 
 // function addOrRemoveEventListener(){
