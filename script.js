@@ -35,13 +35,13 @@ const colors = [
   "transparent"     // special value
 ];
 
-let currentColor
+let currentColor = 'black'
 
 for(let color of colors) {
     const colorItem = document.createElement('div')
     colorItem.classList.add('color-item')
     colorItem.style.backgroundColor = color
-    colorMenu.appendChild(colorItem)
+    colorMenu.appendChild(colorItem)    
     colorItem.addEventListener('mousedown', (e) => {
         currentColor = e.target.style.backgroundColor
         console.log(currentColor)
@@ -66,7 +66,7 @@ for(let i = 0; i < 16 * 16; i++) {
 let isPainting = false
 
 function paintTheGrid(e) {
-    if(isPainting || e.type === 'mousedown') e.target.style.backgroundColor = currentColor
+    if((isPainting || e.type === 'mousedown') && e.button === 0) e.target.style.backgroundColor = currentColor
 }
 
 // function addOrRemoveEventListener(){
@@ -90,10 +90,12 @@ function clearAll(e) {
 
 
 document.addEventListener('mousedown', (e) => {
+    if(e.button === 0) {
     e.preventDefault()
     isPainting = true
     // addOrRemoveEventListener()
     console.log(isPainting)
+}
 })
 
 
