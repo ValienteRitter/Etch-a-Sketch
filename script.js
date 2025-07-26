@@ -1,6 +1,8 @@
 const appContainer = document.querySelector('.app-container')
 const colorMenu = document.querySelector('.color-menu')
 const gridContainer = document.querySelector('.grid-container')
+const paintButton = document.querySelector('.paint-button')
+const eraserButton = document.querySelector('.eraser-button')
 const gridItems = []
 const colors = [
   "white",          // #FFFFFF
@@ -32,10 +34,12 @@ const colors = [
   "beige",          // #F5F5DC
   "coral",          // #FF7F50
   "salmon",         // #FA8072
-  "transparent"     // special value
+//   "transparent"     // special value
 ];
 
 let currentColor = 'black'
+let currentMode
+
 
 for(let color of colors) {
     const colorItem = document.createElement('div')
@@ -44,6 +48,7 @@ for(let color of colors) {
     colorMenu.appendChild(colorItem)    
     colorItem.addEventListener('mousedown', (e) => {
         currentColor = e.target.style.backgroundColor
+        // e.target.style.border = '5px solid black'
         console.log(currentColor)
     })
     
@@ -57,24 +62,29 @@ for(let i = 0; i < 16 * 16; i++) {
     gridContainer.appendChild(gridItem)
     gridItem.classList.add('grid-items')
     gridItem.addEventListener('mousedown', paintTheGrid)
+    gridItem.addEventListener('mousedown', eraseTheGrid)
     gridItem.addEventListener('mouseenter', paintTheGrid)
+    gridItem.addEventListener('mouseenter', eraseTheGrid)
 
     
 }
 
 
 let isPainting = false
+let isErasing = false
 
 function paintTheGrid(e) {
-    if((isPainting || e.type === 'mousedown') && e.button === 0) e.target.style.backgroundColor = currentColor
+    if((isPainting || e.type === 'mousedown') && e.button === 0 && currentMode === 'paint') e.target.style.backgroundColor = currentColor
+    if((isPainting || e.type === 'mousedown') && e.button === 0) console.log('Painted')
+
 }
 
-// function addOrRemoveEventListener(){
-//     for(let gridItem of gridItems) {
-//         isPainting ? gridItem.addEventListener('mouseenter', paintTheGrid) : gridItem.removeEventListener('mouseenter', paintTheGrid)
-//     }
+function eraseTheGrid(e) {
+    if((isErasing || e.type === 'mousedown') && e.button === 0 && currentMode === 'eraser') e.target.style.backgroundColor = 'transparent'
+    if((isErasing || e.type === 'mousedown') && e.button === 0) console.log('Erased')
+}
 
-// }
+
 
 function clearAll(e) {
     if(e.key.toLowerCase() === 'c') {
@@ -88,20 +98,52 @@ function clearAll(e) {
 }
 
 
+function setButtonHighlights(e) {
+    paintButton.classList.remove('isActive')
+    eraserButton.classList.remove('isActive')
+
+    e.target.classList.add('isActive')
+}
+
+paintButton.addEventListener('mousedown', (e) => {
+    currentMode = 'paint'
+    setButtonHighlights(e)
+})
+eraserButton.addEventListener('mousedown', (e) => {
+    currentMode = 'eraser'
+    setButtonHighlights(e)
+
+})
 
 document.addEventListener('mousedown', (e) => {
     if(e.button === 0) {
-    e.preventDefault()
-    isPainting = true
-    // addOrRemoveEventListener()
-    console.log(isPainting)
+        e.preventDefault()
+        switch (currentMode) {
+            case 'paint':
+                isPainting = true
+                console.log(`isPainting is ${isPainting}`)
+                break
+            case 'eraser':
+                isErasing = true
+                console.log(`isErasing is ${isErasing}`)
+                break
+
+        }
+
+        
 }
 })
 
 
 document.addEventListener('mouseup', () => {
-    isPainting = false
-    // addOrRemoveEventListener()
+    switch (currentMode) {
+        case 'paint':
+            isPainting = false
+            break
+        case 'eraser':
+            isErasing = false
+            break
+    }
     console.log(isPainting)
 })
 

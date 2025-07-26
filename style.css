@@ -61,3 +61,9 @@ html, body, .app-container {
 .grid-items {
     border: 2px solid black;
 }
+
+.isActive {
+    background-color: black;
+    color: white;
+    border: 1px solid red;
+}
