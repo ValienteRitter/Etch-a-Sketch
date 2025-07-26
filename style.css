@@ -19,7 +19,7 @@ html, body, .app-container {
     flex-wrap: wrap;
     align-content: start;
     height: 100vh;
-    width: 10rem;
+    width: 20rem;
     border: 2px solid black;
     align-self: flex-start;
 }
