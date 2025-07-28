@@ -61,10 +61,8 @@ for(let i = 0; i < 16 * 16; i++) {
     gridItems.push(gridItem)
     gridContainer.appendChild(gridItem)
     gridItem.classList.add('grid-items')
-    gridItem.addEventListener('mousedown', paintTheGrid)
-    gridItem.addEventListener('mousedown', eraseTheGrid)
-    gridItem.addEventListener('mouseenter', paintTheGrid)
-    gridItem.addEventListener('mouseenter', eraseTheGrid)
+    gridItem.addEventListener('mousedown', handleStates)
+    gridItem.addEventListener('mouseenter', handleStates)
 
     
 }
@@ -74,17 +72,24 @@ let isPainting = false
 let isErasing = false
 
 function paintTheGrid(e) {
-    if((isPainting || e.type === 'mousedown') && e.button === 0 && currentMode === 'paint') e.target.style.backgroundColor = currentColor
+    if((isPainting || e.type === 'mousedown') && e.button === 0) e.target.style.backgroundColor = currentColor
     if((isPainting || e.type === 'mousedown') && e.button === 0) console.log('Painted')
 
 }
 
 function eraseTheGrid(e) {
-    if((isErasing || e.type === 'mousedown') && e.button === 0 && currentMode === 'eraser') e.target.style.backgroundColor = 'transparent'
+    if((isErasing || e.type === 'mousedown') && e.button === 0) e.target.style.backgroundColor = 'transparent'
     if((isErasing || e.type === 'mousedown') && e.button === 0) console.log('Erased')
 }
 
-
+function handleStates(e) {
+    switch(currentMode) {
+        case 'paint':
+            paintTheGrid(e)
+        case 'eraser':
+            eraseTheGrid(e)
+    }
+}
 
 function clearAll(e) {
     if(e.key.toLowerCase() === 'c') {
