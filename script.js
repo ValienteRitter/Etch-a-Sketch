@@ -34,7 +34,6 @@ const colors = [
   "beige",          // #F5F5DC
   "coral",          // #FF7F50
   "salmon",         // #FA8072
-//   "transparent"     // special value
 ];
 
 let currentColor = 'black'
@@ -49,7 +48,6 @@ for(let color of colors) {
     colorItem.addEventListener('mousedown', (e) => {
         currentColor = e.target.style.backgroundColor
         // e.target.style.border = '5px solid black'
-        console.log(currentColor)
     })
     
 
@@ -73,13 +71,10 @@ let isErasing = false
 
 function paintTheGrid(e) {
     if((isPainting || e.type === 'mousedown') && e.button === 0) e.target.style.backgroundColor = currentColor
-    if((isPainting || e.type === 'mousedown') && e.button === 0) console.log('Painted')
-
 }
 
 function eraseTheGrid(e) {
     if((isErasing || e.type === 'mousedown') && e.button === 0) e.target.style.backgroundColor = 'transparent'
-    if((isErasing || e.type === 'mousedown') && e.button === 0) console.log('Erased')
 }
 
 function handleStates(e) {
@@ -94,7 +89,7 @@ function handleStates(e) {
 function clearAll(e) {
     if(e.key.toLowerCase() === 'c') {
         for(let gridItem of gridItems) {
-            gridItem.style.backgroundColor = 'white'
+            gridItem.style.backgroundColor = 'transparent'
         }
             
         
@@ -126,11 +121,9 @@ document.addEventListener('mousedown', (e) => {
         switch (currentMode) {
             case 'paint':
                 isPainting = true
-                console.log(`isPainting is ${isPainting}`)
                 break
             case 'eraser':
                 isErasing = true
-                console.log(`isErasing is ${isErasing}`)
                 break
 
         }
@@ -149,7 +142,6 @@ document.addEventListener('mouseup', () => {
             isErasing = false
             break
     }
-    console.log(isPainting)
 })
 
 document.addEventListener('keydown', clearAll)
