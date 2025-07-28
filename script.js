@@ -77,12 +77,18 @@ function eraseTheGrid(e) {
     if((isErasing || e.type === 'mousedown') && e.button === 0) e.target.style.backgroundColor = 'transparent'
 }
 
+
+
+
+
 function handleStates(e) {
     switch(currentMode) {
         case 'paint':
             paintTheGrid(e)
+            break
         case 'eraser':
             eraseTheGrid(e)
+            break
     }
 }
 
